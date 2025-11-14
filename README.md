@@ -1,51 +1,67 @@
-📦 Producer–Consumer System (Java | Multithreading | Dockerized)
+Producer–Consumer System
+Java · Multithreading · Synchronization · Maven · Docker
 
-A full implementation of the classic Producer–Consumer pattern using:
+This project implements the Producer–Consumer Pattern using Java multithreading, synchronized shared buffer logic, and a complete pipeline to validate correctness.
+It includes full Maven build support, JUnit tests, and Docker containerization for easy execution.
 
-✔ Java
-✔ Multithreading (Thread, wait(), notifyAll())
-✔ Thread synchronization
-✔ Shared buffer
-✔ Analysis utilities
-✔ Unit tests
-✔ Maven build
-✔ Docker containerization
 
-🚀 Features
-Producer
+Features
+✔ Producer
 
-Reads elements from a source list
+Reads items from a predefined source list
 
-Places items into a shared buffer
+Inserts items into the shared buffer
 
-Blocks when buffer is full
+Waits when buffer is full
 
-Consumer
+✔ Consumer
 
-Reads elements from the shared buffer
+Reads items from the shared buffer
 
-Writes items to the destination list
+Writes results into a destination list
 
-Blocks when buffer is empty
+Waits when buffer is empty
 
-Shared Buffer
+✔ Shared Buffer (Synchronized)
 
-Fully synchronized
+Custom implementation using wait() and notifyAll()
 
-Uses wait() / notifyAll()
+Thread-safe operations
 
-Analysis Utilities
+Fixed capacity
 
-Confirms all items were transferred
+✔ Analysis Utilities
 
-Checks order preservation
+Validates whether all items were transferred
+
+Ensures order preservation
 
 Detects missing items
+
+✔ Complete Pipeline
+
+Runs producer and consumer threads together and generates a verification report.
+
+📂 Project Structure
+producer-consumer/
+ ├── src/
+ │   ├── main/java/com/example/producerconsumer/
+ │   │     ├── Producer.java
+ │   │     ├── Consumer.java
+ │   │     ├── SharedBuffer.java
+ │   │     ├── AnalysisUtils.java
+ │   │     └── ProducerConsumerPipeline.java
+ │   └── test/java/com/example/producerconsumer/
+ │         ├── AnalysisUtilsTest.java
+ │         └── ProducerConsumerPipelineTest.java
+ ├── Dockerfile
+ ├── pom.xml
+ └── README.md
 
 🧪 Running Unit Tests
 mvn test
 
-🧱 Build the Project
+🔨 Build the Application (JAR)
 mvn clean package -DskipTests
 
 
@@ -53,52 +69,52 @@ This generates:
 
 target/producer-consumer-1.0.0.jar
 
-🐳 Running With Docker
-1. Build the Docker image
+🐳 Run Using Docker
+1️⃣ Build the Docker image
 docker build -t producer-consumer .
 
-2. Run the container
+2️⃣ Run the container
 docker run producer-consumer
 
-Output example:
+Example Output
 == Running Producer-Consumer Pipeline ==
-Source:       [1,2,3,4,5,6,7,8,9,10]
-Destination:  [1,2,3,4,5,6,7,8,9,10]
+Source       : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Destination  : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 == Analysis Results ==
 All items transferred : true
-Order preserved        : true
-Missing items          : []
+Order preserved       : true
+Missing items         : []
 
-📂 Project Structure
-producer-consumer/
- ├── src/main/java/com/example/producerconsumer
- │    ├── Producer.java
- │    ├── Consumer.java
- │    ├── SharedBuffer.java
- │    ├── ProducerConsumerPipeline.java
- │    └── AnalysisUtils.java
- ├── src/test/java/com/example/producerconsumer
- │    ├── AnalysisUtilsTest.java
- │    └── ProducerConsumerPipelineTest.java
- ├── Dockerfile
- ├── pom.xml
- └── README.md
-
-📝 Technologies Used
+🛠 Technologies Used
 
 Java 17
 
-Maven
-
-Docker
+Maven 3.9+
 
 JUnit 5
 
-Multithreading primitives
+Docker
 
-Blocking queue logic (custom)
+Multithreading (wait/notifyAll)
 
-👩‍💻 Author
+📘 How It Works (High-Level Flow)
 
+Producer generates items → adds to SharedBuffer
+
+SharedBuffer blocks producer if full, blocks consumer if empty
+
+Consumer removes items → stores in destination list
+
+AnalysisUtils validates:
+
+All items transferred
+
+Order preserved
+
+No data loss
+
+Pipeline prints the final results
+
+👤 Author
 Kiran (SK240800)
